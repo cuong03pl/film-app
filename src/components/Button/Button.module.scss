@@ -1,0 +1,56 @@
+
+
+.loginGoogleBtn {
+    color: rgb(22, 24, 35);
+    font-size: 1.3rem;
+    height: 44px;
+    width: 375px;
+    cursor: pointer;
+    font-weight: 600;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    border: 1px solid rgba(22, 24, 35, 0.12);
+    margin-bottom: 20px;
+    background-color: #fff;
+    transition: all linear 0.3s;
+
+    &:hover {
+        background-color: #ccc;
+        transition: all linear 0.3s;
+    }
+    
+}
+
+.loginBtn {
+    background-color: #fe2c55;
+    color: #fff;
+    font-weight: 700;
+    padding: 6px 8px;
+    border-radius: 4px;
+    transition: all linear 0.3s;
+
+    &:hover {
+        transition: all linear 0.3s;
+
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.06)), #fe2c55;
+    }
+}
+
+.menuBtn {
+    padding: 10px 12px;
+    font-size: 1rem;
+    cursor: pointer;
+    line-height: 22px;
+    font-weight: 600;
+    width: 100%;
+    text-align: left;
+    display: flex;
+    transition: all linear 0.3s;
+
+    &:hover {
+        background-color: rgba(22, 24, 35, 0.03);
+        transition: all linear 0.3s;
+
+    }
+}
