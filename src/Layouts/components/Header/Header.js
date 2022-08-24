@@ -1,12 +1,9 @@
-import Tippy from "@tippyjs/react/headless";
 import { useContext, useEffect, useState } from "react";
-import Button from "~/components/Button/Button";
-import { Logo } from "~/components/Icon/Icon";
-import Menu from "~/components/Menu/Menu";
-import Wrapper from "~/components/Wrapper/Wrapper";
+import { Link } from "react-router-dom";
+import { HomeIcon, Logo, SignOutIcon, UserIcon } from "~/components/Icon/Icon";
+import LogOut from "~/components/LogOut/LogOut";
 import config from "~/config";
 import { UserContext } from "~/context/AuthProvider";
-import Search from "../Search/Search";
 
 function Header() {
   const [login, setLogin] = useState(false);
@@ -19,43 +16,32 @@ function Header() {
     }
   }, [data]);
   return (
-    <div className="w-[1492px] px-5 py-4 pr-8 flex items-center justify-between h-[80px]  border-b-[1px] border-solid border-[#16182333]">
-      <div className="flex items-center">
-        <Logo className={"h-[45px] w-[165px] fill-[#e50914]"}></Logo>
-      </div>
-
-      {/* search  */}
-      <Search />
-      {/* action */}
-
-      <div className="flex items-center ">
-        {login ? (
-          <Tippy
-            interactive
-            placement="top-end"
-            offset={[20, 10]}
-            render={(attrs) => (
-              <div className=" " tabIndex="-1" {...attrs}>
-                <Wrapper>
-                  <Menu />
-                </Wrapper>
-              </div>
-            )}
+    <div className=" sticky top-0 h-screen px-5 py-4  flex justify-between flex-col  border-r-[1px] border-solid border-[#16182333]">
+      <div>
+        <Link to="/" className="flex items-center justify-center">
+          <Logo className={"h-[45px] w-[165px] fill-[#e50914]"}></Logo>
+        </Link>
+        <div className="mt-10">
+          <Link
+            to={config.routes.home}
+            className="flex items-center px-2 py-1 hover:text-[#dc2c2c]"
           >
-            <div>
-              {/* <span className="mr-2 text-base ">{data.displayName}</span> */}
-              <img
-                src={data.photoURL}
-                alt=""
-                className="w-[30px] cursor-pointer h-[30px] rounded-[50%]"
-              />
-            </div>
-          </Tippy>
-        ) : (
+            <HomeIcon className={"w-[25px] h-[25px] mr-3"} />
+            <span className="font-medium text-base">Trang Chủ</span>
+          </Link>
+        </div>
+      </div>
+      <div className="">
+        {login && (
           <>
-            <Button loginBtn to={config.routes.login}>
-              Đăng nhập
-            </Button>
+            <Link
+              to={config.routes.home}
+              className="flex items-center px-2 py-3 hover:text-[#dc2c2c]"
+            >
+              <UserIcon className={"w-[25px] h-[25px] mr-3"} />
+              <span className="font-medium text-base">Tài khoản</span>
+            </Link>
+            <LogOut />
           </>
         )}
       </div>

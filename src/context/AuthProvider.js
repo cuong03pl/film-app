@@ -11,7 +11,7 @@ function AuthProvider({ children }) {
     const clean = onAuthStateChanged(auth, (user) => {
       if (user) {
         setInfo(user);
-        navigate("/");
+        navigate(-1);
       } else {
       }
     });
@@ -19,7 +19,7 @@ function AuthProvider({ children }) {
     return () => {
       clean();
     };
-  }, [navigate]);
+  }, []);
 
   return <UserContext.Provider value={info}>{children}</UserContext.Provider>;
 }

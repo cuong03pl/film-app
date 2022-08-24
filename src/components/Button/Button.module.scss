@@ -54,3 +54,17 @@
 
     }
 }
+.watchBtn {
+    padding: 12px;
+    width: 100%;
+    background: #dd003f;
+    text-transform: uppercase;
+    font-size: 18px;
+    color: white;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    span {
+        margin-left: 12px;
+    }
+}

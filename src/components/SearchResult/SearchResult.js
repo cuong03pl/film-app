@@ -1,7 +1,8 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import SearchItem from "./SearchItem";
 
-function SearchResult({ data, title }) {
+function SearchResult({ data, title, onClear, q }) {
   return (
     <div>
       <h4 className="text-[16px] font-semibold py-1 px-3">{title}</h4>
@@ -14,7 +15,8 @@ function SearchResult({ data, title }) {
         className="text-[red] py-1 px-3 flex justify-center text-[16px] 
         hover:bg-[#eae7e7] transition duration-100 ease-linear delay-150
          hover:transition hover:ease-linear hover:duration-100 hover:delay-150"
-        to="/"
+        to={`/search/${q}`}
+        onClick={onClear}
       >
         More
       </Link>

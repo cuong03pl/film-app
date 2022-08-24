@@ -5,9 +5,9 @@ const cx = classNames.bind(styles);
 function Button({
   primary,
   followBtn,
-  watchBtn,
   loginGoogleBtn,
   menuBtn,
+  watchBtn,
   loginBtn,
   children,
   onClick,
@@ -23,8 +23,9 @@ function Button({
     flex: "flex",
     primary,
     followBtn,
-    watchBtn,
+
     loginBtn,
+    watchBtn,
     loginGoogleBtn,
     menuBtn,
     className,
@@ -43,11 +44,7 @@ function Button({
   return (
     <Comp className={classes} {...props}>
       {leftIcon && <span>{leftIcon}</span>}
-      {
-        <span className="text-center flex w-full  justify-center">
-          {children}
-        </span>
-      }
+      {<span className="text-center">{children}</span>}
     </Comp>
   );
 }
