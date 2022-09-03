@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import config from "~/config";
 
-function FavoriteItem({ data }) {
+function RightBarItem({ data }) {
   return (
     <div className="flex mt-4">
       <img
@@ -11,7 +11,10 @@ function FavoriteItem({ data }) {
       />
       <div className="flex flex-col justify-between">
         <div>
-          <Link to={`/watch/${data.id}`} className="font-semibold mt-1 block">
+          <Link
+            to={`/watch/${data.id}`}
+            className="font-semibold mt-1 block text-textPrimary"
+          >
             {data.title}
           </Link>
           {/* <span className="text-[#a2a2be]"> Action, Horror</span> */}
@@ -29,4 +32,4 @@ function FavoriteItem({ data }) {
   );
 }
 
-export default FavoriteItem;
+export default RightBarItem;

@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { getMovieDetails } from "~/apiServices/apiServices";
 import Button from "~/components/Button/Button";
+import Director from "~/components/Director/Director";
 import { PlayIcon } from "~/components/Icon/Icon";
 import MovieCast from "~/components/MovieCast/MovieCast";
 import SimilarFilm from "~/components/SimilarFilm/SimilarFilm";
 import config from "~/config";
-import { getMovieDetails } from "~/utils/request";
 
 function MovieDetail() {
   const { id } = useParams();
-  console.log(id);
   const [data, setData] = useState([]);
-  const [cast, setCast] = useState([]);
   useEffect(() => {
     const fetchApi = async () => {
       const res = await getMovieDetails(id);
@@ -20,13 +19,17 @@ function MovieDetail() {
     };
     fetchApi();
   }, [id]);
-  console.log(data);
   return (
     <div className="">
       <div className="relative">
-        <img src={`${config.api.IMG_API}${data.backdrop_path}`} alt="" />
+        <div
+          className="h-[400px] bg-no-repeat bg-center bg-cover"
+          style={{
+            backgroundImage: `url(${config.api.ORIGINAL_IMG}${data.backdrop_path})`,
+          }}
+        />
       </div>
-      <div className=" bg-[#06121E]  px-5 py-8">
+      <div className=" bg-[#06121E] w-full px-5 py-8">
         <div className="flex">
           <div className="mr-4">
             <img
@@ -62,22 +65,7 @@ function MovieDetail() {
               </span>
             </div>
             <div>
-              <div className="flex ">
-                <span className="w-[120px] block text-[#7a7a7a] ">
-                  ĐẠO DIỄN:
-                </span>
-                <span className="font-bold hover:underline cursor-pointer text-[#dbdbdb]">
-                  Cường
-                </span>
-              </div>
-              <div className="flex ">
-                <span className="w-[120px] block text-[#7a7a7a] ">
-                  KỊCH BẢN
-                </span>
-                <span className="font-bold hover:underline cursor-pointer text-[#dbdbdb]">
-                  Cường
-                </span>
-              </div>
+              <Director id={id} />
               <div className="flex ">
                 <span className="w-[120px] block text-[#7a7a7a] ">
                   QUỐC GIA
@@ -100,9 +88,9 @@ function MovieDetail() {
           </div>
         </div>
         {/* dien vien */}
-        <MovieCast />
+        <MovieCast id={id} />
         {/* phim tuong tu */}
-        <SimilarFilm />
+        <SimilarFilm id={id} />
         {/* cmt */}
       </div>
     </div>

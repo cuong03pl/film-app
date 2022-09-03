@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import { Autoplay, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { getFavorite } from "~/utils/request";
 import BannerItem from "./BannerItem";
 import "swiper/css";
 import "swiper/css/navigation";
+import { getFavorite, getMovieRightBar } from "~/apiServices/apiServices";
 
 function Banner() {
   const [bannerList, setBannerList] = useState([]);
   useEffect(() => {
     const fetchApi = async () => {
-      const res = await getFavorite();
+      const res = await getMovieRightBar("trending/movie/day");
       setBannerList(res);
     };
     fetchApi();

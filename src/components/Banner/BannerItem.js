@@ -9,8 +9,8 @@ function BannerItem({ data }) {
       className="relative w-full flex flex-col items-center h-[400px] "
     >
       <img
-        className="h-full w-full "
-        src={`${config.api.IMG_API}${data.backdrop_path}`}
+        className="h-full w-full object-cover"
+        src={`${config.api.ORIGINAL_IMG}${data.backdrop_path}`}
         alt=""
       />
       <div className="bg-gradient-to-r from-black to-transparent absolute top-0 right-0 left-0 bottom-0"></div>

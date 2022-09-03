@@ -1,7 +1,7 @@
 import Tippy from "@tippyjs/react/headless";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { search } from "~/apiServices/searchServices";
+import { search } from "~/apiServices/apiServices";
 import { ClearIcon, SearchIcon } from "~/components/Icon/Icon";
 import SearchResult from "~/components/SearchResult/SearchResult";
 import Wrapper from "~/components/Wrapper/Wrapper";
@@ -53,10 +53,10 @@ function Search() {
         </div>
       )}
     >
-      <div className="h-[50px] relative w-full border-[1.5px] border-transparent border-solid flex items-center bg-[#1618230f] py-3 px-4 pr-0 rounded-[92px] focus-within:border-[1.5px] focus-within:border-[#16182333] focus-within:border-solid ">
+      <div className="h-[50px] relative w-full border-[1.5px] border-transparent border-solid flex items-center bg-[#ccc] py-3 px-4 pr-0 rounded-[92px] focus-within:border-[1.5px] focus-within:border-[#16182333] focus-within:border-solid ">
         <input
           ref={input}
-          className=" flex items-center text-base w-[150px] h-full outline-none bg-transparent "
+          className=" flex items-center text-base w-[150px] h-full outline-none text-black bg-transparent "
           placeholder="Tìm theo tên"
           onChange={(e) => setSearchValue(e.target.value)}
           value={searchValue}

@@ -1,4 +1,4 @@
-import NavBar from "./NavBar/NavBar";
+import RightBar from "../components/RightBar/RightBar";
 import Header from "../components/Header/Header";
 import AuthProvider from "~/context/AuthProvider";
 
@@ -9,7 +9,7 @@ function DefaultLayout({ children }) {
         <Header></Header>
         <div className="flex justify-between w-full">
           {children}
-          <NavBar />
+          <RightBar />
         </div>
       </AuthProvider>
     </div>

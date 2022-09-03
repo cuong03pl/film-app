@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { FreeMode, Navigation, Pagination } from "swiper";
+import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import config from "~/config";
-import { getFilmHomePage } from "~/utils/request";
-import { StarIcon } from "../Icon/Icon";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
+import RateFilm from "../RateFilm/RateFilm";
+import { getFilmHomePage } from "~/apiServices/apiServices";
 
 function MovieList({ path, title }) {
   const [movieList, setMovieList] = useState([]);
@@ -20,16 +20,14 @@ function MovieList({ path, title }) {
   }, [path]);
   return (
     <div>
-      <h3 className="text-xl font-bold ">{title}</h3>
+      <h3 className="text-xl font-bold text-textPrimary">{title}</h3>
       <Swiper
         slidesPerView="auto"
         spaceBetween={30}
         slidesPerGroupAuto
         loop={true}
         loopedSlides={5}
-        navigation={true}
-        modules={[Navigation]}
-        className="swiper swiper-initialized swiper-horizontal swiper-pointer-events absolute   h-full rounded-2xl  mySwiper"
+        className=" absolute   h-full rounded-2xl  mySwiper"
       >
         {movieList.map((item, index) => {
           return (
@@ -43,15 +41,10 @@ function MovieList({ path, title }) {
                   src={`${config.api.IMG_API}${item.poster_path}`}
                   alt=""
                 />
-                <p className="text-center font-semibold text-lg max-h-[56px] line-clamp-2">
+                <p className="text-center font-semibold text-lg max-h-[56px] line-clamp-2 text-textPrimary">
                   {item.title}
                 </p>
-                <div className="absolute right-5 flex items-center px-2 top-2  rounded-2xl bg-[#5985FF] text-[white]">
-                  <span className="font-semibold mr-1">
-                    {item.vote_average}
-                  </span>
-                  <StarIcon className={"h-4 w-4"} />
-                </div>
+                <RateFilm data={item.vote_average} />
               </Link>
             </SwiperSlide>
           );

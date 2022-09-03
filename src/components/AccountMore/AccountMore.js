@@ -14,7 +14,9 @@ function AccountMore({ data }) {
     <div className="flex items-center justify-end mb-5 w-full ">
       {login ? (
         <div className="flex items-center">
-          <span className="mr-2 text-base ">{data.displayName}</span>
+          <span className="mr-2 text-base text-textPrimary">
+            {data.displayName}
+          </span>
           <img
             src={data.photoURL}
             alt=""

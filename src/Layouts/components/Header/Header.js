@@ -16,7 +16,7 @@ function Header() {
     }
   }, [data]);
   return (
-    <div className=" sticky top-0 h-screen px-5 py-4  flex justify-between flex-col  border-r-[1px] border-solid border-[#16182333]">
+    <div className=" bg-bgPrimary sticky top-0 h-screen px-5 py-4  flex justify-between flex-col  border-r-[1px] border-solid border-[#16182333]">
       <div>
         <Link to="/" className="flex items-center justify-center">
           <Logo className={"h-[45px] w-[165px] fill-[#e50914]"}></Logo>
@@ -24,10 +24,12 @@ function Header() {
         <div className="mt-10">
           <Link
             to={config.routes.home}
-            className="flex items-center px-2 py-1 hover:text-[#dc2c2c]"
+            className="flex items-center px-2 py-1 text-textPrimary"
           >
             <HomeIcon className={"w-[25px] h-[25px] mr-3"} />
-            <span className="font-medium text-base">Trang Chủ</span>
+            <span className="font-medium text-base text-textPrimary">
+              Trang Chủ
+            </span>
           </Link>
         </div>
       </div>
@@ -36,10 +38,12 @@ function Header() {
           <>
             <Link
               to={config.routes.home}
-              className="flex items-center px-2 py-3 hover:text-[#dc2c2c]"
+              className="flex items-center px-2 py-3 text-textPrimary "
             >
               <UserIcon className={"w-[25px] h-[25px] mr-3"} />
-              <span className="font-medium text-base">Tài khoản</span>
+              <span className="font-medium text-base text-textPrimary ">
+                Tài khoản
+              </span>
             </Link>
             <LogOut />
           </>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { search } from "~/apiServices/searchServices";
-import { StarIcon } from "~/components/Icon/Icon";
+import { getSearch, search } from "~/apiServices/apiServices";
+import RateFilm from "~/components/RateFilm/RateFilm";
 import config from "~/config";
 
 function Search() {
@@ -29,10 +29,7 @@ function Search() {
             alt=""
           />
           <p className="text-center font-semibold text-lg">{item.title}</p>
-          <div className="absolute right-10 flex items-center px-2 top-2  rounded-2xl bg-[#5985FF] text-[white]">
-            <span className="font-semibold mr-1">{item.vote_average}</span>
-            <StarIcon />
-          </div>
+          <RateFilm data={item.vote_average} />
         </Link>
       );
     });

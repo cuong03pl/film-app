@@ -16,11 +16,11 @@ function LogOut() {
   return (
     <Link
       to={config.routes.home}
-      className="flex items-center px-2 py-3 hover:text-[#dc2c2c]"
+      className="flex items-center px-2 py-3 text-white"
       onClick={handleLogOut}
     >
       <LogOutIcon className={"w-[25px] h-[25px] mr-3"} />
-      <span className="font-medium text-base">Đăng xuất</span>
+      <span className="font-medium text-base text-white">Đăng xuất</span>
     </Link>
   );
 }
