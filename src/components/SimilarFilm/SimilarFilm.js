@@ -17,6 +17,7 @@ function SimilarFilm({ id }) {
       setSimilar(res);
     };
     fetchApi();
+    return () => {};
   }, [id]);
   return (
     <div className="mt-7">
@@ -33,7 +34,7 @@ function SimilarFilm({ id }) {
           return (
             <SwiperSlide key={index} className="!w-[175px] select-none">
               <Link
-                to={`/movie/123`}
+                to={`/movie/${item.id}`}
                 className="w-[175px] flex flex-col items-center mt-6 overflow-hidden relative hover:scale-105 hover:brightness-110 transition duration-300"
               >
                 <Images

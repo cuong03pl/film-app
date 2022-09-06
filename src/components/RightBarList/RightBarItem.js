@@ -12,7 +12,7 @@ function RightBarItem({ data }) {
       <div className="flex flex-col justify-between">
         <div>
           <Link
-            to={`/watch/${data.id}`}
+            to={`/movie/${data.id}`}
             className="font-semibold mt-1 block text-textPrimary"
           >
             {data.title}

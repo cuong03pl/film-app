@@ -1,17 +1,22 @@
-import { useState } from "react";
+import { forwardRef, useState } from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
-function Images({ className, src, alt, fallBack }) {
-  const [srcImg, setSrcImg] = useState(src);
+function Images({ className, src, alt, fallBack, lazy }) {
+  let Comp = "img";
+  if (lazy) {
+    Comp = LazyLoadImage;
+  }
+  const [srcImg, setSrcImg] = useState("");
   const handleError = () => {
-    src ? setSrcImg(src) : setSrcImg(fallBack);
+    setSrcImg(fallBack);
   };
   return (
-    <img
+    <Comp
       className={className}
       alt={alt}
-      src={srcImg}
+      src={srcImg ? srcImg : src}
       onError={handleError}
-    ></img>
+    ></Comp>
   );
 }
 

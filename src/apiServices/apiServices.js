@@ -1,14 +1,16 @@
 import config from "~/config";
 import { get } from "~/utils/request";
 
-export const search = async (query) => {
+export const search = async (query, page) => {
   const res = await get("search/movie", {
     params: {
       query,
       api_key: config.api.API_KEY,
+      page,
     },
   });
-  return res.data.results;
+  console.log(res);
+  return res.data;
 };
 export const getMovieRightBar = async (path) => {
   const res = await get(path, {
@@ -52,4 +54,15 @@ export const getSimilarFilm = async (id) => {
     },
   });
   return dataMovie.data.results;
+};
+
+export const getGenresFilm = async (id, page) => {
+  const dataMovie = await get(`discover/movie`, {
+    params: {
+      with_genres: id,
+      api_key: config.api.API_KEY,
+      page,
+    },
+  });
+  return dataMovie.data;
 };

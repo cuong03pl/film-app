@@ -8,7 +8,9 @@ function SearchResult({ data, title, onClear, q }) {
       <h4 className="text-[16px] font-semibold py-1 px-3">{title}</h4>
 
       {data.slice(0, 5).map((item, index) => {
-        return <SearchItem key={index} item={item}></SearchItem>;
+        return (
+          <SearchItem onHidden={onClear} key={index} item={item}></SearchItem>
+        );
       })}
 
       <Link

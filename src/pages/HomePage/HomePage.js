@@ -1,7 +1,7 @@
 import Banner from "~/components/Banner/Banner";
 import MovieList from "~/components/MovieList/MovieList";
 
-function Home() {
+function HomePage() {
   return (
     <div className="w-full  pb-6  bg-bgPrimary">
       <div className="mx-8 mt-6">
@@ -22,4 +22,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default HomePage;

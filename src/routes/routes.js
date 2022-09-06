@@ -1,31 +1,36 @@
 import config from "~/config";
-import Home from "~/pages/Home/Home";
-import Login from "~/pages/Login/Login";
-import MovieDetail from "~/pages/MovieDetail/MovieDetail";
-import Search from "~/pages/Search/Search";
-import Watch from "~/pages/Watch/Watch";
+import GenresPage from "~/pages/GenresPage/GenresPage";
+import HomePage from "~/pages/HomePage/HomePage";
+import LoginPage from "~/pages/LoginPage/LoginPage";
+import MovieDetailPage from "~/pages/MovieDetailPage/MovieDetailPage";
+import SearchPage from "~/pages/SearchPage/SearchPage";
+import WatchPage from "~/pages/WatchPage/WatchPage";
 
 const publicRoutes = [
   {
     path: config.routes.home,
-    component: <Home />,
+    component: <HomePage />,
   },
   {
     path: config.routes.login,
-    component: <Login />,
+    component: <LoginPage />,
     layout: null,
   },
   {
     path: config.routes.search,
-    component: <Search />,
+    component: <SearchPage />,
   },
   {
     path: config.routes.watch,
-    component: <Watch />,
+    component: <WatchPage />,
   },
   {
     path: config.routes.movie,
-    component: <MovieDetail />,
+    component: <MovieDetailPage />,
+  },
+  {
+    path: config.routes.genres,
+    component: <GenresPage />,
   },
 ];
 

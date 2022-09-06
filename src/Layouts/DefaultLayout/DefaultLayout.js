@@ -4,7 +4,7 @@ import AuthProvider from "~/context/AuthProvider";
 
 function DefaultLayout({ children }) {
   return (
-    <div className="flex">
+    <div className="flex bg-bgPrimary">
       <AuthProvider>
         <Header></Header>
         <div className="flex justify-between w-full">

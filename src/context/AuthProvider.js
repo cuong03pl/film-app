@@ -1,21 +1,26 @@
 import { onAuthStateChanged } from "firebase/auth";
-import { createContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { createContext, memo, useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import config from "~/config";
 import { auth } from "~/firebase/config";
+
 export const UserContext = createContext();
 
 function AuthProvider({ children }) {
   const navigate = useNavigate();
   const [info, setInfo] = useState();
+  const location = useLocation();
+
   useEffect(() => {
     const clean = onAuthStateChanged(auth, (user) => {
       if (user) {
         setInfo(user);
-        navigate(-1);
+        if (location.pathname === config.routes.login) {
+          navigate(-1);
+        }
       } else {
       }
     });
-
     return () => {
       clean();
     };
@@ -24,4 +29,4 @@ function AuthProvider({ children }) {
   return <UserContext.Provider value={info}>{children}</UserContext.Provider>;
 }
 
-export default AuthProvider;
+export default memo(AuthProvider);

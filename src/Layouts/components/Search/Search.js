@@ -17,7 +17,7 @@ function Search() {
   useEffect(() => {
     const fetchApi = async () => {
       const res = await search(debounced);
-      setResultValue(res);
+      setResultValue(res.results);
       setShow(true);
     };
     fetchApi(debounced);
@@ -27,7 +27,6 @@ function Search() {
       setShow(false);
     }
   }, [searchValue]);
-
   const handleClear = () => {
     setSearchValue("");
     input.current.focus();
@@ -54,6 +53,7 @@ function Search() {
       )}
     >
       <div className="h-[50px] relative w-full border-[1.5px] border-transparent border-solid flex items-center bg-[#ccc] py-3 px-4 pr-0 rounded-[92px] focus-within:border-[1.5px] focus-within:border-[#16182333] focus-within:border-solid ">
+        {/* input search */}
         <input
           ref={input}
           className=" flex items-center text-base w-[150px] h-full outline-none text-black bg-transparent "
@@ -62,6 +62,7 @@ function Search() {
           value={searchValue}
         />
 
+        {/* button clear */}
         <span
           onClick={handleClear}
           className="px-2 cursor-pointer absolute right-[52px]"
@@ -70,7 +71,15 @@ function Search() {
         </span>
 
         <div className="w-[1px] bg-[#1618231f] absolute right-[52px] h-full"></div>
-        <Link to={"/search"} className="block h-[46px] w-[52px]">
+
+        {/* button search */}
+        <Link
+          to={`/search/${debounced}`}
+          onClick={handleClear}
+          className={`block h-[46px] w-[52px] ${
+            !searchValue && "pointer-events-none opacity-50"
+          }`}
+        >
           <button className="flex items-center absolute right-0 justify-center h-[46px] w-[52px] hover:bg-[#16182308] rounded-r-[92px]">
             <SearchIcon className={"h-[20px] w-[20px]"} />
           </button>
