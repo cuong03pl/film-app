@@ -66,3 +66,20 @@ export const getGenresFilm = async (id, page) => {
   });
   return dataMovie.data;
 };
+
+export const getPerson = async (id) => {
+  const dataMovie = await get(`person/${id}`, {
+    params: {
+      api_key: config.api.API_KEY,
+    },
+  });
+  return dataMovie.data;
+};
+export const getMoviesParticipated = async (id) => {
+  const dataMovie = await get(`person/${id}/movie_credits`, {
+    params: {
+      api_key: config.api.API_KEY,
+    },
+  });
+  return dataMovie.data;
+};

@@ -3,6 +3,7 @@ import GenresPage from "~/pages/GenresPage/GenresPage";
 import HomePage from "~/pages/HomePage/HomePage";
 import LoginPage from "~/pages/LoginPage/LoginPage";
 import MovieDetailPage from "~/pages/MovieDetailPage/MovieDetailPage";
+import PersonPage from "~/pages/PersonPage/PersonPage";
 import SearchPage from "~/pages/SearchPage/SearchPage";
 import WatchPage from "~/pages/WatchPage/WatchPage";
 
@@ -31,6 +32,10 @@ const publicRoutes = [
   {
     path: config.routes.genres,
     component: <GenresPage />,
+  },
+  {
+    path: config.routes.person,
+    component: <PersonPage />,
   },
 ];
 

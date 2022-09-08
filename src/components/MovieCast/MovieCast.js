@@ -7,7 +7,6 @@ import image from "~/assets/img/img";
 import { getCast } from "~/apiServices/apiServices";
 import "swiper/css";
 import "swiper/css/pagination";
-import Skeleton from "react-loading-skeleton";
 
 function MovieCast({ id }) {
   const [cast, setCast] = useState([]);
@@ -20,6 +19,7 @@ function MovieCast({ id }) {
 
     return () => {};
   }, [id]);
+  console.log(cast);
   return (
     <div className="mt-7">
       <h3 className="text-white font-bold text-xl mb-8">Diễn Viên</h3>
@@ -40,16 +40,19 @@ function MovieCast({ id }) {
                 key={index}
                 className=" !w-[160px] select-none flex flex-col items-center"
               >
-                <Images
-                  fallBack={image.actingFallBack}
-                  src={
-                    item.profile_path !== null
-                      ? `${config.api.IMG_API}${item.profile_path}`
-                      : ""
-                  }
-                  alt=""
-                  className="select-none h-[120px] w-[120px] object-cover rounded-[50%] cursor-pointer border-transparent border-solid border-[1px] hover:border-[#cc7b19f7] "
-                />
+                <Link to={`/person/${item.id}`}>
+                  <Images
+                    fallBack={image.actingFallBack}
+                    src={
+                      item.profile_path !== null
+                        ? `${config.api.IMG_API}${item.profile_path}`
+                        : ""
+                    }
+                    alt=""
+                    className="select-none h-[120px] w-[120px] object-cover rounded-[50%] cursor-pointer border-transparent border-solid border-[1px] hover:border-[#cc7b19f7] "
+                  />
+                </Link>
+
                 <Link
                   to={""}
                   className="text-[#dbdbdb] text-lg font-semibold text-center"

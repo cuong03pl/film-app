@@ -15,6 +15,7 @@ function Director({ id }) {
     };
     fetchApi();
   }, [id]);
+  console.log(director);
   return (
     <div className="flex ">
       <span className="w-[120px] min-w-[120px] block text-[#7a7a7a] ">
