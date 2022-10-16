@@ -21,7 +21,7 @@ function PersonPage() {
       <div className="flex">
         <div className="text-textPrimary">
           <img
-            className="min-w-[300px] object-cover "
+            className="min-w-[300px] w-[300px] object-cover "
             src={`${config.api.IMG_API}${person.profile_path}`}
             alt=""
           />
