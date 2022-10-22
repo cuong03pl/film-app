@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { search } from "~/apiServices/apiServices";
 import { ClearIcon, SearchIcon } from "~/components/Icon/Icon";
-import SearchResult from "~/components/SearchResult/SearchResult";
+import SearchResult from "~/components/Proper/SearchProper/SearchProper";
 import Wrapper from "~/components/Wrapper/Wrapper";
 import { useDebounce } from "~/hooks/useDebounce";
 
@@ -16,8 +16,13 @@ function Search() {
 
   useEffect(() => {
     const fetchApi = async () => {
-      const res = await search(debounced);
-      setResultValue(res.results);
+      await search(debounced)
+        .then((res) => {
+          setResultValue(res.results);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
       setShow(true);
     };
     fetchApi(debounced);
@@ -74,7 +79,7 @@ function Search() {
 
         {/* button search */}
         <Link
-          to={`/search/${debounced}`}
+          to={`/search/${searchValue}`}
           onClick={handleClear}
           className={`block h-[46px] w-[52px] ${
             !searchValue && "pointer-events-none opacity-50"

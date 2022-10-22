@@ -7,15 +7,20 @@ function Director({ id }) {
   const [data, setData] = useState([]);
   useEffect(() => {
     const fetchApi = async () => {
-      const res = await getCast(`movie/${id}/credits`);
-
-      setDirector(
-        res.crew.filter((item) => item.known_for_department === "Directing")
-      );
+      await getCast(`movie/${id}/credits`)
+        .then((data) => {
+          setDirector(
+            data.crew.filter(
+              (item) => item.known_for_department === "Directing"
+            )
+          );
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     };
     fetchApi();
   }, [id]);
-  console.log(director);
   return (
     <div className="flex ">
       <span className="w-[120px] min-w-[120px] block text-[#7a7a7a] ">
@@ -26,7 +31,7 @@ function Director({ id }) {
           return (
             <Link
               key={index}
-              to=""
+              to={`/person/${item.id}`}
               className="font-bold hover:underline cursor-pointer text-[#dbdbdb] mr-3"
             >
               {item.name}

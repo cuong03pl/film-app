@@ -83,3 +83,21 @@ export const getMoviesParticipated = async (id) => {
   });
   return dataMovie.data;
 };
+
+export const getReviews = async (id) => {
+  const dataMovie = await get(`movie/${id}/reviews`, {
+    params: {
+      api_key: config.api.API_KEY,
+    },
+  });
+  return dataMovie.data.results;
+};
+
+export const getEpisode = async (id) => {
+  const dataMovie = await get(`movie/${id}/lists`, {
+    params: {
+      api_key: config.api.API_KEY,
+    },
+  });
+  return dataMovie.data.results;
+};

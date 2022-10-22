@@ -8,21 +8,30 @@ import config from "~/config";
 function GenresPage() {
   const [movies, setMovies] = useState([]);
   const { id } = useParams();
+  const { name } = useParams();
   const [pages, setPages] = useState(1);
   const [page, setPage] = useState();
   useEffect(() => {
     const fetchApi = async () => {
-      const res = await getGenresFilm(id, page);
-      setMovies(res.results);
-      {
-        res.total_pages > 500 && setPages(500);
-      }
+      await getGenresFilm(id, page)
+        .then((res) => {
+          setMovies(res.results);
+          {
+            res.total_pages > 500 && setPages(500);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     };
     fetchApi();
   }, [id, page]);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [page]);
+  useEffect(() => {
+    document.title = `Film ${name}`;
+  });
   const renderMovies = () => {
     return movies.map((item, index) => {
       return (
@@ -45,7 +54,7 @@ function GenresPage() {
     });
   };
 
-  const handlePageClick = (event) => {
+  const handlePageClick = (event = 0) => {
     setPage(event.selected + 1);
   };
   return (

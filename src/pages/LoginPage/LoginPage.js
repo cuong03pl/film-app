@@ -2,10 +2,12 @@ import Button from "~/components/Button/Button";
 import { FacebookIcon, GoogleIcon } from "~/components/Icon/Icon";
 import { signInWithFacebook, signInWithGoogle } from "~/firebase/config";
 import AuthProvider from "~/context/AuthProvider";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 function Login() {
   const [login, setLogin] = useState(true);
-
+  useEffect(() => {
+    document.title = "Đăng nhập";
+  });
   return (
     <AuthProvider>
       <div className="bg-loginBgr bg-cover h-full w-full h-screen flex justify-center items-center">

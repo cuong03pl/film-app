@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getMovieDetails } from "~/apiServices/apiServices";
 import Button from "~/components/Button/Button";
 import Director from "~/components/Director/Director";
+import FilmDetails from "~/components/FilmDetails/FilmDetails";
 import Genres from "~/components/Genres/Genres";
 import { PlayIcon } from "~/components/Icon/Icon";
 import MovieCast from "~/components/MovieCast/MovieCast";
@@ -12,14 +13,27 @@ import config from "~/config";
 function MovieDetail() {
   const { id } = useParams();
   const [data, setData] = useState([]);
-  const [genres, setGenres] = useState([]);
+  useEffect(() => {
+    if (data.title) {
+      document.title = `${data.title}`;
+    } else {
+      document.title = "CFilm";
+    }
+    return () => {};
+  }, [id, data.title]);
   useEffect(() => {
     const fetchApi = async () => {
-      const res = await getMovieDetails(id);
-      setData(res);
-      setGenres(res.genres);
+      await getMovieDetails(id)
+        .then((res) => {
+          setData(res);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     };
     fetchApi();
+
+    return () => {};
   }, [id]);
 
   return (
@@ -40,40 +54,15 @@ function MovieDetail() {
               src={`${config.api.IMG_API}${data.poster_path}`}
               alt=""
             />
-            <Button watchBtn leftIcon={<PlayIcon className={"h-5 w-5"} />}>
+            <Button
+              watchBtn
+              to={`/watch/${data.id}`}
+              leftIcon={<PlayIcon className={"h-5 w-5"} />}
+            >
               Xem Phim
             </Button>
           </div>
-          <div className="px-4">
-            <h2 className="font-semibold text-5xl mb-7 text-[#fff]">
-              {data.title}
-            </h2>
-            {/* genres */}
-            <Genres genresList={genres} />
-            {/* IMDB */}
-            <div className="flex items-center mb-5">
-              <div className="font-bold text-black bg-[#f5c518] py-1 px-2  flex justify-center items-center rounded-xl">
-                IMDb
-              </div>
-              <span className="text-[#a2a2be] ml-2  font-bold">
-                {String(data.vote_average).slice(0, 3)}
-              </span>
-            </div>
-            <div>
-              <Director id={id} />
-
-              <div className="flex ">
-                <span className="w-[120px] block text-[#7a7a7a] ">
-                  kHỞI CHIẾU
-                </span>
-                <span className="font-bold  cursor-pointer text-[#dbdbdb]">
-                  {data.release_date}
-                </span>
-              </div>
-            </div>
-
-            <div className="text-[#b5b5b5] mt-6">{data.overview}</div>
-          </div>
+          <FilmDetails id={id} movieDetailPage />
         </div>
         {/* dien vien */}
         <MovieCast id={id} />

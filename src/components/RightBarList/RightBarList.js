@@ -6,8 +6,13 @@ function RightBarList({ path, title }) {
 
   useEffect(() => {
     const fetchApi = async () => {
-      const res = await getMovieRightBar(path);
-      setFavorite(res);
+      await getMovieRightBar(path)
+        .then((res) => {
+          setFavorite(res);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     };
     fetchApi();
   }, []);

@@ -24,6 +24,7 @@ const publicRoutes = [
   {
     path: config.routes.watch,
     component: <WatchPage />,
+    watch: true,
   },
   {
     path: config.routes.movie,

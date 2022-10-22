@@ -1,12 +1,11 @@
 import { initializeApp } from "firebase/app";
-// import { getFirestore } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
 import {
   getAuth,
   signInWithPopup,
   GoogleAuthProvider,
   FacebookAuthProvider,
 } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
 
 const firebaseConfig = {
   apiKey: "AIzaSyB2mYQbqHM4u3vdBckfffovoQ--N-ZXWWc",
@@ -17,8 +16,10 @@ const firebaseConfig = {
   appId: "1:562686510434:web:4c198cf800986389d1183b",
   measurementId: "G-W2DS0HYML2",
 };
-
 let app = initializeApp(firebaseConfig);
+
+export const db = getFirestore(app);
+
 export const auth = getAuth(app);
 // Google
 const providerGoogle = new GoogleAuthProvider();

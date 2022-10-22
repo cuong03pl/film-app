@@ -9,6 +9,7 @@ function Button({
   menuBtn,
   watchBtn,
   loginBtn,
+  selectBtn,
   children,
   onClick,
   to,
@@ -23,7 +24,7 @@ function Button({
     flex: "flex",
     primary,
     followBtn,
-
+    selectBtn,
     loginBtn,
     watchBtn,
     loginGoogleBtn,

@@ -1,21 +1,47 @@
-import { async } from "@firebase/util";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getPerson } from "~/apiServices/apiServices";
-import MoviesParticipated from "~/components/MoviesParticipated/MoviesParticipated";
+import { getMoviesParticipated, getPerson } from "~/apiServices/apiServices";
+import SearchResult from "~/components/SearchResult/SearchResult";
 import config from "~/config";
 
 function PersonPage() {
   const { id } = useParams();
   const [person, setPerson] = useState({});
+  const [moviesParticipated, setMoviesParticipated] = useState([]);
+
   useEffect(() => {
     const fetchApi = async () => {
-      const res = await getPerson(id);
-      setPerson(res);
+      await getPerson(id)
+        .then((res) => {
+          setPerson(res);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     };
     fetchApi();
   }, [id]);
-  console.log(person);
+  useEffect(() => {
+    const fetchApi = async () => {
+      await getMoviesParticipated(id)
+        .then((res) => {
+          setMoviesParticipated(res.cast);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+    fetchApi();
+    return () => {};
+  }, [id]);
+  useEffect(() => {
+    if (person.name) {
+      document.title = `${person.name}`;
+    } else {
+      document.title = "CFilm";
+    }
+    return () => {};
+  }, [person.name]);
   return (
     <div className=" mt-[40px] px-[10px]">
       <div className="flex">
@@ -56,7 +82,7 @@ function PersonPage() {
         </div>
       </div>
 
-      <MoviesParticipated id={id} />
+      <SearchResult data={moviesParticipated} />
     </div>
   );
 }

@@ -191,3 +191,17 @@ export const PlayIcon = ({ className }) => {
     </svg>
   );
 };
+
+export const SubmitIcon = ({ className }) => {
+  return (
+    <svg
+      fill="currentColor"
+      className={className}
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path fill="none" d="M0 0h24v24H0z"></path>
+      <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+    </svg>
+  );
+};

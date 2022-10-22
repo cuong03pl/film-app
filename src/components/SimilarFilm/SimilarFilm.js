@@ -12,9 +12,13 @@ function SimilarFilm({ id }) {
   const [similar, setSimilar] = useState([]);
   useEffect(() => {
     const fetchApi = async () => {
-      const res = await getSimilarFilm(id);
-
-      setSimilar(res);
+      await getSimilarFilm(id)
+        .then((res) => {
+          setSimilar(res);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     };
     fetchApi();
     return () => {};

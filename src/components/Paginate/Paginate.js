@@ -11,7 +11,7 @@ function Paginate({ pageCount, handlePageClick }) {
         pageCount={pageCount}
         previousLabel="< "
         renderOnZeroPageCount={null}
-        initialPage={1}
+        initialPage={0}
         containerClassName={"flex justify-center items-center"}
         breakLinkClassName={"text-textPrimary"}
         pageLinkClassName={

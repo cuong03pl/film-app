@@ -10,8 +10,13 @@ function Banner() {
   const [bannerList, setBannerList] = useState([]);
   useEffect(() => {
     const fetchApi = async () => {
-      const res = await getMovieRightBar("trending/movie/day");
-      setBannerList(res);
+      await getMovieRightBar("trending/movie/day")
+        .then((data) => {
+          setBannerList(data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     };
     fetchApi();
   }, []);

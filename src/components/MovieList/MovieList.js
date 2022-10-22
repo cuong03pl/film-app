@@ -13,8 +13,13 @@ function MovieList({ path, title }) {
   const [movieList, setMovieList] = useState([]);
   useEffect(() => {
     const fetchApi = async () => {
-      const res = await getFilmHomePage(`movie/${path}`);
-      setMovieList(res);
+      await getFilmHomePage(`movie/${path}`)
+        .then((res) => {
+          setMovieList(res);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     };
     fetchApi();
   }, [path]);

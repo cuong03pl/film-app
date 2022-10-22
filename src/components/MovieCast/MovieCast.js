@@ -12,14 +12,18 @@ function MovieCast({ id }) {
   const [cast, setCast] = useState([]);
   useEffect(() => {
     const fetchApi = async () => {
-      const res = await getCast(`movie/${id}/credits`);
-      setCast(res.cast);
+      const res = await getCast(`movie/${id}/credits`)
+        .then((res) => {
+          setCast(res.cast);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     };
     fetchApi();
 
     return () => {};
   }, [id]);
-  console.log(cast);
   return (
     <div className="mt-7">
       <h3 className="text-white font-bold text-xl mb-8">Diễn Viên</h3>
