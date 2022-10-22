@@ -5,7 +5,7 @@ import RateFilm from "../RateFilm/RateFilm";
 
 function SearchResult({ data }) {
   return (
-    <div className="mt-[32px]">
+    <div className="mt-[32px] w-full">
       <h3 className="text-textPrimary text-[20px] font-[600]">
         Phim đã tham gia
       </h3>

@@ -6,6 +6,7 @@ function Button({
   primary,
   followBtn,
   loginGoogleBtn,
+  favouriteBtn,
   menuBtn,
   watchBtn,
   loginBtn,
@@ -28,6 +29,7 @@ function Button({
     loginBtn,
     watchBtn,
     loginGoogleBtn,
+    favouriteBtn,
     menuBtn,
     className,
   });

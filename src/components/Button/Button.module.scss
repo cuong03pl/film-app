@@ -86,3 +86,25 @@
         transition: all linear 0.3s;
     }
 }
+
+.favouriteBtn {
+    padding: 8px;
+    width: 120px;
+    background: #8746f9dc;
+    font-size: 16px;
+    color: white;
+    display: block;
+    font-weight: 600;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    span {
+        margin-left: 6px;
+    }
+    &:hover {
+        opacity: 0.8;
+        transition: all linear 0.3s;
+
+    }
+}

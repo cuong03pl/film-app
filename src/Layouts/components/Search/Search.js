@@ -21,7 +21,7 @@ function Search() {
           setResultValue(res.results);
         })
         .catch((error) => {
-          console.log(error);
+          return;
         });
       setShow(true);
     };

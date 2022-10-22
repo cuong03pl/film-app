@@ -1,9 +1,15 @@
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { HomeIcon, Logo, SignOutIcon, UserIcon } from "~/components/Icon/Icon";
+import {
+  FavouriteIcon,
+  HomeIcon,
+  Logo,
+  UserIcon,
+} from "~/components/Icon/Icon";
 import LogOut from "~/components/LogOut/LogOut";
 import config from "~/config";
 import { UserContext } from "~/context/AuthProvider";
+import HeaderItem from "./HeaderItem/HeaderItem";
 
 function Header() {
   const [login, setLogin] = useState(false);
@@ -22,29 +28,27 @@ function Header() {
           <Logo className={"h-[45px] w-[165px] fill-[#e50914]"}></Logo>
         </Link>
         <div className="mt-10">
-          <Link
+          <HeaderItem
             to={config.routes.home}
-            className="flex items-center px-2 py-1 text-textPrimary"
-          >
-            <HomeIcon className={"w-[25px] h-[25px] mr-3"} />
-            <span className="font-medium text-base text-textPrimary">
-              Trang Chủ
-            </span>
-          </Link>
+            Icon={<HomeIcon className={"w-[25px] h-[25px] mr-3"} />}
+            title={"Trang Chủ"}
+          />
+
+          <HeaderItem
+            to={config.routes.favourite}
+            Icon={<FavouriteIcon className={"w-[25px] h-[25px] mr-3"} />}
+            title={"Yêu Thích"}
+          />
         </div>
       </div>
       <div className="">
         {login && (
           <>
-            <Link
-              to={config.routes.home}
-              className="flex items-center px-2 py-3 text-textPrimary "
-            >
-              <UserIcon className={"w-[25px] h-[25px] mr-3"} />
-              <span className="font-medium text-base text-textPrimary ">
-                Tài khoản
-              </span>
-            </Link>
+            <HeaderItem
+              to={config.routes.profile}
+              Icon={<UserIcon className={"w-[25px] h-[25px] mr-3"} />}
+              title={"Tài khoản"}
+            />
             <LogOut />
           </>
         )}

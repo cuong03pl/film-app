@@ -1,18 +1,7 @@
-import { async } from "@firebase/util";
 import { doc, getDoc, onSnapshot, setDoc, updateDoc } from "firebase/firestore";
-import {
-  useCallback,
-  useContext,
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
-import { getReviews } from "~/apiServices/apiServices";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { UserContext } from "~/context/AuthProvider";
 import { db } from "~/firebase/config";
-import useFireStore from "~/hooks/useFireStore";
 import { SubmitIcon } from "../Icon/Icon";
 import Images from "../Images/Images";
 import CommentItem from "./CommentItem";
@@ -79,7 +68,6 @@ function Comment({ id }) {
     },
     [comment]
   );
-
   return (
     <div className="w-full mt-[24px]">
       <h3 className="text-[#fff] text-[24px] font-bold">Bình luận</h3>

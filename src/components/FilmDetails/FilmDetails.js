@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { getMovieDetails } from "~/apiServices/apiServices";
+import Button from "../Button/Button";
 import Director from "../Director/Director";
 import Genres from "../Genres/Genres";
+import { FavouriteIcon } from "../Icon/Icon";
 
-function FilmDetails({ id, watchPage, movieDetailPage }) {
+function FilmDetails({ id, watchPage, movieDetailPage, onClick, favourite }) {
   const [movie, setMovie] = useState();
   useEffect(() => {
     const fetchApi = async () => {
@@ -30,6 +32,16 @@ function FilmDetails({ id, watchPage, movieDetailPage }) {
       <h2 className="font-semibold text-5xl mb-7 text-[#fff]">
         {movie?.title}
       </h2>
+      {favourite && (
+        <Button
+          onClick={onClick}
+          favouriteBtn
+          leftIcon={<FavouriteIcon className={"h-4 w-4"} />}
+        >
+          Yêu Thích
+        </Button>
+      )}
+
       {/* genres */}
       <Genres id={id} />
       {/* IMDB */}
