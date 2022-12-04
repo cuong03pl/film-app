@@ -1,13 +1,13 @@
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import SearchItem from "./SearchItem";
+import PropTypes from "prop-types";
 
 function SearchProper({ data, title, onClear, q }) {
   return (
     <div>
       <h4 className="text-[16px] font-semibold py-1 px-3">{title}</h4>
 
-      {data.slice(0, 5).map((item, index) => {
+      {data?.slice(0, 5).map((item, index) => {
         return (
           <SearchItem onHidden={onClear} key={index} item={item}></SearchItem>
         );
@@ -25,5 +25,10 @@ function SearchProper({ data, title, onClear, q }) {
     </div>
   );
 }
-
+SearchProper.propsType = {
+  data: PropTypes.array,
+  title: PropTypes.string,
+  onClear: PropTypes.func,
+  q: PropTypes.string,
+};
 export default SearchProper;

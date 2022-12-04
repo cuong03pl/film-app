@@ -1,6 +1,8 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import config from "~/config";
+import PropTypes from "prop-types";
+import Images from "../Images/Images";
+import image from "~/assets/img/img";
 
 function BannerItem({ data }) {
   return (
@@ -8,7 +10,8 @@ function BannerItem({ data }) {
       to={`/movie/${data.id}`}
       className="relative w-full flex flex-col items-center h-[400px] "
     >
-      <img
+      <Images
+        fallBack={image.similarFilmFallBack}
         className="h-full w-full object-cover"
         src={`${config.api.ORIGINAL_IMG}${data.backdrop_path}`}
         alt=""
@@ -28,5 +31,7 @@ function BannerItem({ data }) {
     </Link>
   );
 }
-
+BannerItem.propsType = {
+  data: PropTypes.object,
+};
 export default BannerItem;

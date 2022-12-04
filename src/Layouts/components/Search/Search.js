@@ -1,5 +1,5 @@
 import Tippy from "@tippyjs/react/headless";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { search } from "~/apiServices/apiServices";
 import { ClearIcon, SearchIcon } from "~/components/Icon/Icon";
@@ -38,6 +38,7 @@ function Search() {
     setResultValue([]);
     setShow(false);
   };
+
   return (
     <Tippy
       interactive
@@ -63,7 +64,9 @@ function Search() {
           ref={input}
           className=" flex items-center text-base w-[150px] h-full outline-none text-black bg-transparent "
           placeholder="Tìm theo tên"
-          onChange={(e) => setSearchValue(e.target.value)}
+          onChange={(e) => {
+            setSearchValue(e.target.value);
+          }}
           value={searchValue}
         />
 

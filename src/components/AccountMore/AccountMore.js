@@ -1,9 +1,12 @@
 import Button from "~/components/Button/Button";
 import config from "~/config";
 import { useEffect, useState } from "react";
-
+import PropTypes from "prop-types";
+import Images from "../Images/Images";
+import image from "~/assets/img/img";
 function AccountMore({ data }) {
   const [login, setLogin] = useState(false);
+
   useEffect(() => {
     if (data) {
       setLogin(true);
@@ -15,10 +18,11 @@ function AccountMore({ data }) {
       {login ? (
         <div className="flex items-center">
           <span className="mr-2 text-base text-textPrimary">
-            {data.displayName}
+            {data?.displayName}
           </span>
-          <img
-            src={data.photoURL}
+          <Images
+            fallBack={`${image.similarFilmFallBack}`}
+            src={data?.photoURL}
             alt=""
             className="w-[30px] cursor-pointer h-[30px] rounded-[50%]"
           />
@@ -33,5 +37,7 @@ function AccountMore({ data }) {
     </div>
   );
 }
-
+AccountMore.propsTypes = {
+  data: PropTypes.object,
+};
 export default AccountMore;

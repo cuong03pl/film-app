@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import BannerItem from "./BannerItem";
 import "swiper/css";
 import "swiper/css/navigation";
-import { getFavorite, getMovieRightBar } from "~/apiServices/apiServices";
+import { getMovieRightBar } from "~/apiServices/apiServices";
 
 function Banner() {
   const [bannerList, setBannerList] = useState([]);

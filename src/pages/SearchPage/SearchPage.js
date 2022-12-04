@@ -10,6 +10,7 @@ function Search() {
   const { q } = useParams();
   const [pages, setPages] = useState(1);
   const [page, setPage] = useState();
+
   useEffect(() => {
     const fetchApi = async () => {
       await search(q, page)

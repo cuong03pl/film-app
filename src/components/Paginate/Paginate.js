@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ReactPaginate from "react-paginate";
+import PropTypes from "prop-types";
+
 function Paginate({ pageCount, handlePageClick }) {
   return (
     <div className="my-5 ">
@@ -37,5 +39,8 @@ function Paginate({ pageCount, handlePageClick }) {
     </div>
   );
 }
-
+Paginate.propsType = {
+  pageCount: PropTypes.number,
+  handlePageClick: PropTypes.func,
+};
 export default Paginate;

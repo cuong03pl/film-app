@@ -1,4 +1,5 @@
 import config from "~/config";
+import ErrorPage from "~/pages/ErrorPage/ErrorPage";
 import FavouritePage from "~/pages/FavouritePage/FavouritePage";
 import GenresPage from "~/pages/GenresPage/GenresPage";
 import HomePage from "~/pages/HomePage/HomePage";
@@ -48,6 +49,11 @@ const publicRoutes = [
   {
     path: config.routes.profile,
     component: <ProfilePage />,
+  },
+  {
+    path: config.routes.error,
+    component: <ErrorPage />,
+    layout: null,
   },
 ];
 

@@ -1,10 +1,11 @@
-import { doc, getDoc, onSnapshot, setDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { UserContext } from "~/context/AuthProvider";
 import { db } from "~/firebase/config";
 import { SubmitIcon } from "../Icon/Icon";
 import Images from "../Images/Images";
 import CommentItem from "./CommentItem";
+import PropTypes from "prop-types";
 
 function Comment({ id }) {
   const user = useContext(UserContext);
@@ -46,8 +47,8 @@ function Comment({ id }) {
     setComments((pre) => [
       {
         author_details: {
-          avatar_path: user.photoURL,
-          username: user.displayName,
+          avatar_path: user?.photoURL,
+          username: user?.displayName,
         },
         content: comment,
         image: true,
@@ -68,6 +69,7 @@ function Comment({ id }) {
     },
     [comment]
   );
+
   return (
     <div className="w-full mt-[24px]">
       <h3 className="text-[#fff] text-[24px] font-bold">Bình luận</h3>
@@ -96,7 +98,7 @@ function Comment({ id }) {
           <CommentItem
             item={item}
             items={comments}
-            imageUserAuth={item.image}
+            imageUserAuth={item?.image}
             key={index}
           />
         );
@@ -104,5 +106,7 @@ function Comment({ id }) {
     </div>
   );
 }
-
+Comment.propsType = {
+  id: PropTypes.string.isRequired,
+};
 export default Comment;

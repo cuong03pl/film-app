@@ -9,5 +9,6 @@ const routes = {
   history: "/history",
   favourite: "/favourite",
   profile: "/profile",
+  error: "*",
 };
 export default routes;

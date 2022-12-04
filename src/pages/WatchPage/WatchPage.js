@@ -9,7 +9,6 @@ function Watch() {
   const { id } = useParams();
   const [data, setData] = useState([]);
 
-  const user = useContext(UserContext);
   useEffect(() => {
     const fetchApi = async () => {
       await getMovieDetails(id)

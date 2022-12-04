@@ -9,7 +9,6 @@ export const search = async (query, page) => {
       page,
     },
   });
-  console.log(res);
   return res.data;
 };
 export const getMovieRightBar = async (path) => {
@@ -95,6 +94,15 @@ export const getReviews = async (id) => {
 
 export const getEpisode = async (id) => {
   const dataMovie = await get(`movie/${id}/lists`, {
+    params: {
+      api_key: config.api.API_KEY,
+    },
+  });
+  return dataMovie.data.results;
+};
+
+export const getTrailer = async (id) => {
+  const dataMovie = await get(`movie/${id}/videos`, {
     params: {
       api_key: config.api.API_KEY,
     },

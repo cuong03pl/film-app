@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
 import config from "~/config";
 import { auth } from "~/firebase/config";
-import { LogOutIcon, SignOutIcon, UserIcon } from "../Icon/Icon";
-import MenuItem from "./MenuItem";
+import { LogOutIcon } from "../Icon/Icon";
 
 function LogOut() {
   const handleLogOut = () => {

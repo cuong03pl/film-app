@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getMovieDetails } from "~/apiServices/apiServices";
+import PropTypes from "prop-types";
 
 function Genres({ id }) {
   const [genres, setGenres] = useState([]);
@@ -32,5 +33,7 @@ function Genres({ id }) {
     </div>
   );
 }
-
+Genres.propsType = {
+  id: PropTypes.string.isRequired,
+};
 export default Genres;

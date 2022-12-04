@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getGenresFilm } from "~/apiServices/apiServices";
 import Paginate from "~/components/Paginate/Paginate";
-import RateFilm from "~/components/RateFilm/RateFilm";
-import config from "~/config";
+import SearchResult from "~/components/SearchResult/SearchResult";
 
 function GenresPage() {
   const [movies, setMovies] = useState([]);
@@ -32,27 +31,6 @@ function GenresPage() {
   useEffect(() => {
     document.title = `Film ${name}`;
   });
-  const renderMovies = () => {
-    return movies.map((item, index) => {
-      return (
-        <Link
-          key={index}
-          to={`/movie/${item.id}`}
-          className="max-w-[25%] w-[25%] flex flex-col items-center mt-6 overflow-hidden relative hover:scale-105 hover:brightness-110 transition duration-300"
-        >
-          <img
-            className="w-[180px] h-[270px] rounded-xl"
-            src={`${config.api.IMG_API}${item.poster_path}`}
-            alt=""
-          />
-          <p className="text-center font-semibold text-lg h-[56px] text-textPrimary text-ellipsis  line-clamp-2">
-            {item.title}
-          </p>
-          <RateFilm data={item.vote_average} />
-        </Link>
-      );
-    });
-  };
 
   const handlePageClick = (event = 0) => {
     setPage(event.selected + 1);
@@ -60,7 +38,9 @@ function GenresPage() {
   return (
     <>
       <div className="w-full px-5">
-        <div className="flex flex-wrap  w-full mt-6 ">{renderMovies()}</div>
+        <div className="flex flex-wrap  w-full mt-6 ">
+          {<SearchResult data={movies} />}
+        </div>
         <Paginate pageCount={pages} handlePageClick={handlePageClick} />
       </div>
     </>

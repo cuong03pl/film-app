@@ -1,12 +1,22 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getMovieDetails } from "~/apiServices/apiServices";
 import Button from "../Button/Button";
 import Director from "../Director/Director";
 import Genres from "../Genres/Genres";
 import { FavouriteIcon } from "../Icon/Icon";
+import PropTypes from "prop-types";
+import { UserContext } from "~/context/AuthProvider";
 
-function FilmDetails({ id, watchPage, movieDetailPage, onClick, favourite }) {
+function FilmDetails({
+  id,
+  watchPage,
+  movieDetailPage,
+  onClick,
+  favourite,
+  check,
+}) {
   const [movie, setMovie] = useState();
+  const user = useContext(UserContext);
   useEffect(() => {
     const fetchApi = async () => {
       await getMovieDetails(id)
@@ -19,6 +29,7 @@ function FilmDetails({ id, watchPage, movieDetailPage, onClick, favourite }) {
     };
     fetchApi();
   }, [id]);
+
   let classes;
   if (watchPage) {
     classes = "mb-4";
@@ -26,16 +37,24 @@ function FilmDetails({ id, watchPage, movieDetailPage, onClick, favourite }) {
   if (movieDetailPage) {
     classes = "px-4";
   }
-
   return (
     <div className={classes}>
       <h2 className="font-semibold text-5xl mb-7 text-[#fff]">
         {movie?.title}
       </h2>
-      {favourite && (
+
+      {favourite && !check ? (
         <Button
           onClick={onClick}
           favouriteBtn
+          leftIcon={<FavouriteIcon className={"h-4 w-4"} />}
+        >
+          Yêu Thích
+        </Button>
+      ) : (
+        <Button
+          onClick={onClick}
+          selectedBtn
           leftIcon={<FavouriteIcon className={"h-4 w-4"} />}
         >
           Yêu Thích
@@ -68,5 +87,12 @@ function FilmDetails({ id, watchPage, movieDetailPage, onClick, favourite }) {
     </div>
   );
 }
-
+FilmDetails.propsType = {
+  id: PropTypes.string,
+  watchPage: PropTypes.bool,
+  movieDetailPage: PropTypes.bool,
+  onClick: PropTypes.func,
+  favourite: PropTypes.bool,
+  check: PropTypes.bool,
+};
 export default FilmDetails;

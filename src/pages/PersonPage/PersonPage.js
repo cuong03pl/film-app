@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getMoviesParticipated, getPerson } from "~/apiServices/apiServices";
+import image from "~/assets/img/img";
+import Images from "~/components/Images/Images";
 import SearchResult from "~/components/SearchResult/SearchResult";
 import config from "~/config";
 
@@ -43,10 +45,11 @@ function PersonPage() {
     return () => {};
   }, [person.name]);
   return (
-    <div className=" mt-[40px] px-[10px]">
+    <div className=" mt-[40px] px-[10px] w-full">
       <div className="flex">
         <div className="text-textPrimary">
-          <img
+          <Images
+            fallBack={`${image.similarFilmFallBack}`}
             className="min-w-[300px] w-[300px] object-cover "
             src={`${config.api.IMG_API}${person.profile_path}`}
             alt=""
@@ -81,8 +84,12 @@ function PersonPage() {
           <p className="text-[#b5b5b5]">{person.biography}</p>
         </div>
       </div>
-
-      <SearchResult data={moviesParticipated} />
+      <div className="mt-5 ">
+        <h3 className="text-textPrimary text-[20px] font-[600]">
+          Phim đã tham gia
+        </h3>
+        <SearchResult data={moviesParticipated} />
+      </div>
     </div>
   );
 }

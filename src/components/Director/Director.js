@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getCast } from "~/apiServices/apiServices";
+import PropTypes from "prop-types";
 
 function Director({ id }) {
   const [director, setDirector] = useState([]);
-  const [data, setData] = useState([]);
+
   useEffect(() => {
     const fetchApi = async () => {
       await getCast(`movie/${id}/credits`)
         .then((data) => {
           setDirector(
             data.crew.filter(
-              (item) => item.known_for_department === "Directing"
+              (item) => item?.known_for_department === "Directing"
             )
           );
         })
@@ -31,10 +32,10 @@ function Director({ id }) {
           return (
             <Link
               key={index}
-              to={`/person/${item.id}`}
+              to={`/person/${item?.id}`}
               className="font-bold hover:underline cursor-pointer text-[#dbdbdb] mr-3"
             >
-              {item.name}
+              {item?.name}
             </Link>
           );
         })}
@@ -42,5 +43,7 @@ function Director({ id }) {
     </div>
   );
 }
-
+Director.propsTypes = {
+  id: PropTypes.string,
+};
 export default Director;
