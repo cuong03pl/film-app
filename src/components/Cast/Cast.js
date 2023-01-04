@@ -8,19 +8,25 @@ import CastItem from "./CastItem";
 
 function Cast({ id }) {
   const [cast, setCast] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
+    setIsLoading(true);
     const fetchApi = async () => {
-      const res = await getCast(`movie/${id}/credits`)
+      await getCast(`movie/${id}/credits`)
         .then((res) => {
           setCast(res?.cast);
+          setIsLoading(false);
         })
         .catch((error) => {
           console.log(error);
         });
     };
     fetchApi();
-
-    return () => {};
+    // setTimeout(() => {
+    //   setIsLoading(false);
+    // }, 5000);
+    // return () => {};
   }, [id]);
   return (
     <div className="mt-10">
@@ -42,7 +48,7 @@ function Cast({ id }) {
                 key={index}
                 className=" !w-[160px] select-none flex flex-col items-center"
               >
-                <CastItem item={item} />
+                <CastItem isLoading={isLoading} item={item} />
               </SwiperSlide>
             );
           })}

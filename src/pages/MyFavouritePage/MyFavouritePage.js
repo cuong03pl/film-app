@@ -1,0 +1,97 @@
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { useContext, useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import image from "~/assets/img/img";
+import { CloseIcon } from "~/components/Icon/Icon";
+import Images from "~/components/Images/Images";
+import SkeletonItem from "~/components/Skeleton/Skeleton";
+import config from "~/config";
+
+import { UserContext } from "~/context/AuthProvider";
+import { db } from "~/firebase/config";
+import "./MyFavouritePage.module.scss";
+function MyFavouritePage() {
+  const { id } = useParams();
+  const [isLoading, setIsLoading] = useState(true);
+
+  const user = useContext(UserContext);
+  const [favourite, setFavourite] = useState([]);
+  const [deleted, setDeleted] = useState(false);
+  useEffect(() => {
+    setIsLoading(true);
+    const fetchApi = async () => {
+      await getDoc(doc(db, "favourite", `${user?.uid}`))
+        .then((data) => {
+          setFavourite(data.data()?.favourite);
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+    fetchApi();
+    // setTimeout(() => {
+    //   setIsLoading(false);
+    // }, 1000);
+  }, [id, user]);
+  useEffect(() => {
+    if (deleted && user) {
+      setDoc(doc(db, "favourite", `${user?.uid}`), { favourite });
+      setDeleted(false);
+    }
+    return () => {};
+  }, [favourite]);
+  const handleDelete = (item) => {
+    const favouriteNew = favourite.filter((favouriteItem) => {
+      return favouriteItem.id !== item.id;
+    });
+    setFavourite(favouriteNew);
+    setDoc(doc(db, "favourite", `${user?.uid}`), { favourite });
+    if (deleted) {
+      setDeleted(false);
+    } else setDeleted(true);
+  };
+  return (
+    <div className="mt-[12px] w-full ">
+      <div className="flex relative w-full flex-wrap">
+        {favourite?.map((item, index) => {
+          return (
+            <div className="max-w-[25%] w-[25%] flex flex-col items-center mt-6 ">
+              {isLoading ? (
+                <>
+                  <SkeletonItem className={" w-[180px] h-[270px]"} />
+                  <SkeletonItem className={" w-[180px] h-[20px] mt-[6px]"} />
+                </>
+              ) : (
+                <Link
+                  className="flex flex-col items-center overflow-hidden relative hover:scale-105 hover:brightness-110 transition duration-300"
+                  key={index}
+                  to={`/movie/${item?.id}`}
+                >
+                  <Images
+                    fallBack={image?.similarFilmFallBack}
+                    className="w-[180px] h-[270px] rounded-xl "
+                    src={`${config.api.IMG_API}${item?.poster_path}`}
+                    alt=""
+                  />
+                  <p className="text-center font-semibold text-lg text-textPrimary text-ellipsis  line-clamp-1">
+                    {item?.title}
+                  </p>
+                </Link>
+              )}
+
+              <div
+                onClick={() => handleDelete(item)}
+                className="cursor-pointer  items-center px-2 py-1 top-2 mt-2 rounded-2xl bg-[#5985FF] text-[white] delete-btn"
+              >
+                <CloseIcon className={"h-4 w-4 "} />
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+export default MyFavouritePage;

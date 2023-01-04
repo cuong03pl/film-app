@@ -6,6 +6,8 @@ import { SubmitIcon } from "../Icon/Icon";
 import Images from "../Images/Images";
 import CommentItem from "./CommentItem";
 import PropTypes from "prop-types";
+import SkeletonItem from "../Skeleton/Skeleton";
+import image from "~/assets/img/img";
 
 function Comment({ id }) {
   const user = useContext(UserContext);
@@ -22,8 +24,11 @@ function Comment({ id }) {
   ]);
   const [comment, setComment] = useState("");
   const [check, setCheck] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const input = useRef();
   useEffect(() => {
+    setIsLoading(true);
     const fetchApi = async () => {
       await getDoc(doc(db, "comments", `${id}`))
         .then((data) => {
@@ -32,6 +37,7 @@ function Comment({ id }) {
         .catch((error) => {
           console.log(error);
         });
+      setIsLoading(false);
     };
     fetchApi();
   }, [id, check]);
@@ -74,28 +80,39 @@ function Comment({ id }) {
     <div className="w-full mt-[24px]">
       <h3 className="text-[#fff] text-[24px] font-bold">Bình luận</h3>
       <div className="flex items-center h-[80px] py-5">
-        <Images
-          className={"rounded-[50%] h-[48px] w-[48px] "}
-          src={`${user?.photoURL}`}
-        ></Images>
-        <input
-          value={comment}
-          ref={input}
-          placeholder={"Nhập bình luận"}
-          className="w-full mx-5 bg-[#8b7b7b3b] px-3 rounded-xl min-h-full block text-textPrimary outline-none border-none"
-          onChange={onChangeInput}
-        />
-        <div onClick={handleSubmit}>
-          <SubmitIcon
-            className={"w-[40px] h-[40px] text-[blue] cursor-pointer"}
-          />
-        </div>
+        {isLoading ? (
+          <>
+            <SkeletonItem className={" rounded-[50%] h-[48px] w-[48px]"} />
+            <SkeletonItem className={" rounded-3xl h-[40px] w-[850px] ml-5"} />
+          </>
+        ) : (
+          <>
+            <Images
+              className={"rounded-[50%] h-[48px] w-[48px] "}
+              src={`${user?.photoURL}`}
+              fallBack={`${image?.actingFallBack}`}
+            ></Images>
+            <input
+              value={comment}
+              ref={input}
+              placeholder={"Nhập bình luận"}
+              className="w-full mx-5 bg-[#8b7b7b3b] px-3 rounded-xl min-h-full block text-textPrimary outline-none border-none"
+              onChange={onChangeInput}
+            />
+            <div onClick={handleSubmit}>
+              <SubmitIcon
+                className={"w-[40px] h-[40px] text-[blue] cursor-pointer"}
+              />
+            </div>
+          </>
+        )}
       </div>
 
       {/* cmt item */}
       {comments?.map((item, index) => {
         return (
           <CommentItem
+            isLoading={isLoading}
             item={item}
             items={comments}
             imageUserAuth={item?.image}

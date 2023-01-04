@@ -3,7 +3,6 @@ import Banner from "~/components/Banner/Banner";
 import MovieList from "~/components/MovieList/MovieList";
 
 function HomePage() {
-  const [loading, setLoading] = useState(true);
   useEffect(() => {
     document.title = "CFilm";
   }, []);

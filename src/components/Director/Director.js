@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getCast } from "~/apiServices/apiServices";
 import PropTypes from "prop-types";
+import SkeletonItem from "../Skeleton/Skeleton";
+import { Fragment } from "react";
 
-function Director({ id }) {
+function Director({ id, isLoading }) {
   const [director, setDirector] = useState([]);
 
   useEffect(() => {
@@ -30,13 +32,14 @@ function Director({ id }) {
       <div className="flex flex-wrap">
         {director.map((item, index) => {
           return (
-            <Link
-              key={index}
-              to={`/person/${item?.id}`}
-              className="font-bold hover:underline cursor-pointer text-[#dbdbdb] mr-3"
-            >
-              {item?.name}
-            </Link>
+            <Fragment key={index}>
+              <Link
+                to={`/person/${item?.id}`}
+                className="font-bold hover:underline cursor-pointer text-[#dbdbdb] mr-3"
+              >
+                {item.name}
+              </Link>
+            </Fragment>
           );
         })}
       </div>

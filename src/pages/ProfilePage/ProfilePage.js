@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import image from "~/assets/img/img";
 import { ChangeInfoIcon } from "~/components/Icon/Icon";
 import Images from "~/components/Images/Images";
 import { UserContext } from "~/context/AuthProvider";
@@ -10,8 +11,9 @@ function ProfilePage() {
     <div className="flex items-center w-full">
       <div className="w-[50%] flex justify-center">
         <Images
+          fallBack={image?.actingFallBack}
           className={"w-[250px] h-[250px] rounded-[50%]"}
-          src={`${user.photoURL}`}
+          src={`${user?.photoURL}`}
         />
       </div>
 
@@ -19,7 +21,7 @@ function ProfilePage() {
         <div className="text-[white] mb-4">
           <div className="font-bold text-lg">Họ và tên</div>
           <div className="flex justify-between">
-            <span>{user.displayName} </span>
+            <span>{user?.displayName} </span>
             <span>
               <ChangeInfoIcon className={"w-[25px] h-[25px]"} />
             </span>
@@ -28,7 +30,7 @@ function ProfilePage() {
         <div className="text-[white] mb-4">
           <div className="font-bold text-lg">Email</div>
           <div className="flex justify-between">
-            <span>{user.email} </span>
+            <span>{user?.email} </span>
             <span>
               <ChangeInfoIcon className={"w-[25px] h-[25px]"} />
             </span>
@@ -37,7 +39,7 @@ function ProfilePage() {
         <div className="text-[white] mb-4">
           <div className="font-bold text-lg">Số điện thoại</div>
           <div className="flex justify-between">
-            <span>{user.phoneNumber ? user.phoneNumber : "Không có"} </span>
+            <span>{user?.phoneNumber ? user?.phoneNumber : "Không có"} </span>
             <span>
               <ChangeInfoIcon className={"w-[25px] h-[25px]"} />
             </span>
@@ -45,7 +47,7 @@ function ProfilePage() {
         </div>
         <div className="text-[white] mb-4">
           <div className="font-bold text-lg">Ngày tạo</div>
-          <span> {user.metadata.creationTime} </span>
+          <span> {user?.metadata.creationTime} </span>
         </div>
       </div>
     </div>

@@ -10,13 +10,16 @@ function RightBar() {
   return (
     <div
       className={
-        "min-w-[30%] bg-bgPrimary  overflow-auto sticky top-0 h-screen  w-[25%] border-l-[1px] border-solid border-[#16182333] flex flex-col pt-5 px-[42px] pb-5"
+        "right-bar min-w-[30%] bg-bgPrimary  overflow-auto sticky top-0 h-screen  w-[25%] border-l-[1px] border-solid border-[#16182333] flex flex-col pt-5 px-[42px] pb-5"
       }
     >
       <AccountMore data={data} />
       <Search />
-      <RightBarList path={"movie/popular"} title={"Popular Movies"} />
-      <RightBarList path={"trending/movie/day"} title={"Favourite Movies"} />
+      <RightBarList path={"movie/popular"} title={"Top 5 Popular Movies"} />
+      <RightBarList
+        path={"trending/movie/day"}
+        title={"Top 5 Favourite Movies"}
+      />
     </div>
   );
 }

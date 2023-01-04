@@ -8,14 +8,19 @@ import config from "~/config";
 import Images from "../Images/Images";
 import RateFilm from "../RateFilm/RateFilm";
 import PropTypes from "prop-types";
+import SkeletonItem from "../Skeleton/Skeleton";
 
 function SimilarFilm({ id }) {
   const [similar, setSimilar] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
+    setIsLoading(true);
     const fetchApi = async () => {
       await getSimilarFilm(id)
         .then((res) => {
           setSimilar(res);
+          setIsLoading(false);
         })
         .catch((error) => {
           console.log(error);
@@ -38,21 +43,36 @@ function SimilarFilm({ id }) {
         {similar.map((item, index) => {
           return (
             <SwiperSlide key={index} className="!w-[175px] select-none">
-              <Link
-                to={`/movie/${item?.id}`}
-                className="w-[185px] flex flex-col items-center mt-3 overflow-hidden relative hover:scale-105 hover:brightness-110 transition duration-300"
-              >
-                <Images
-                  fallBack={image.similarFilmFallBack}
-                  className="object-cover rounded-xl"
-                  src={`${config.api.IMG_API}${item?.backdrop_path}`}
-                  alt=""
-                />
-                <p className="text-[#dbdbdb] text-lg font-semibold text-center max-h-[56px] line-clamp-2">
-                  {item?.title}
-                </p>
-                <RateFilm small sizeIcon="h-3 w-3" data={item?.vote_average} />
-              </Link>
+              <>
+                {isLoading ? (
+                  <>
+                    <SkeletonItem
+                      className={"h-[120px] w-[185px] rounded-xl"}
+                    />
+                    <SkeletonItem className={"h-[28px] w-[185px] mt-1"} />
+                  </>
+                ) : (
+                  <Link
+                    to={`/movie/${item?.id}`}
+                    className="w-[185px] flex flex-col items-center mt-3 overflow-hidden relative hover:scale-105 hover:brightness-110 transition duration-300"
+                  >
+                    <Images
+                      fallBack={image?.similarFilmFallBack}
+                      className="object-cover rounded-xl min-h-[100px] h-full"
+                      src={`${config.api.IMG_API}${item?.backdrop_path}`}
+                      alt=""
+                    />
+                    <p className="text-[#dbdbdb] text-lg font-semibold text-center max-h-[56px] line-clamp-2">
+                      {item?.title}
+                    </p>
+                    <RateFilm
+                      small
+                      sizeIcon="h-3 w-3"
+                      data={item?.vote_average}
+                    />
+                  </Link>
+                )}
+              </>
             </SwiperSlide>
           );
         })}

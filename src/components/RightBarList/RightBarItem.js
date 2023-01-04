@@ -8,7 +8,7 @@ function RightBarItem({ data }) {
   return (
     <div className="flex mt-4">
       <Images
-        fallBack={`${image.similarFilmFallBack}`}
+        fallBack={`${image?.similarFilmFallBack}`}
         className="w-[80px] h-[120px] rounded-xl mr-3"
         src={`${config.api.IMG_API}${data?.poster_path}`}
         alt=""
@@ -28,7 +28,7 @@ function RightBarItem({ data }) {
             IMDb
           </div>
           <span className="text-[#a2a2be] ml-2  font-bold">
-            {data?.vote_average}
+            {String(data?.vote_average).slice(0, 3)}
           </span>
         </div>
       </div>

@@ -13,9 +13,12 @@ import config from "~/config";
 import { UserContext } from "~/context/AuthProvider";
 import { db } from "~/firebase/config";
 import Trailer from "~/components/Trailer/Trailer";
+import SkeletonItem from "~/components/Skeleton/Skeleton";
+import image from "~/assets/img/img";
 
 function MovieDetail() {
   const user = useContext(UserContext);
+  const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
   const [data, setData] = useState([]);
   const [favourite, setFavourite] = useState([]);
@@ -31,15 +34,22 @@ function MovieDetail() {
   }, [id, data.title]);
   useEffect(() => {
     const fetchApi = async () => {
+      setIsLoading(true);
+
       await getMovieDetails(id)
         .then((res) => {
           setData(res);
+          setIsLoading(false);
         })
         .catch((error) => {
           console.log(error);
         });
     };
     fetchApi();
+    // setTimeout(() => {
+    //   setIsLoading(false);
+    // }, 1000);
+
     return () => {};
   }, [id]);
   // xu ly
@@ -104,30 +114,43 @@ function MovieDetail() {
   return (
     <div className="">
       <div className="relative">
-        <div
-          className="h-[400px] bg-no-repeat bg-center bg-cover"
-          style={{
-            backgroundImage: `url(${config.api.ORIGINAL_IMG}${data.backdrop_path})`,
-          }}
-        />
+        {isLoading ? (
+          <SkeletonItem className={"h-[400px] w-[889px]"} />
+        ) : (
+          <div
+            className="h-[400px] bg-no-repeat bg-center bg-cover"
+            style={{
+              backgroundImage: `url(${config.api.ORIGINAL_IMG}${data.backdrop_path})`,
+            }}
+          />
+        )}
       </div>
 
       <div className=" bg-[#06121E] w-full px-5 py-8">
         <div className="flex">
           <div className="mr-4">
-            <Images
-              className="min-w-[300px] object-cover mb-8"
-              src={`${config.api.IMG_API}${data.poster_path}`}
-              alt=""
-            />
+            {isLoading ? (
+              <SkeletonItem className={" min-w-[300px] h-[450px] mb-[32px]"} />
+            ) : (
+              <Images
+                fallBack={`${image?.similarFilmFallBack}`}
+                className="min-w-[300px] object-cover mb-8"
+                src={`${config.api.IMG_API}${data.poster_path}`}
+                alt=""
+              />
+            )}
 
-            <Button
-              watchBtn
-              to={`/watch/${data.id}`}
-              leftIcon={<PlayIcon className={"h-5 w-5"} />}
-            >
-              Xem Phim
-            </Button>
+            {isLoading ? (
+              <SkeletonItem className={" min-w-[300px] h-[50px]"} />
+            ) : (
+              <Button
+                watchBtn
+                to={`/watch/${data.id}`}
+                leftIcon={<PlayIcon className={"h-5 w-5"} />}
+              >
+                Xem Phim
+              </Button>
+            )}
           </div>
 
           <FilmDetails

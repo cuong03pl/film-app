@@ -5,40 +5,54 @@ import BannerItem from "./BannerItem";
 import "swiper/css";
 import "swiper/css/navigation";
 import { getMovieRightBar } from "~/apiServices/apiServices";
+import SkeletonItem from "../Skeleton/Skeleton";
 
 function Banner() {
   const [bannerList, setBannerList] = useState([]);
+  const [isloading, setIsLoading] = useState(true);
+
   useEffect(() => {
+    setIsLoading(true);
     const fetchApi = async () => {
       await getMovieRightBar("trending/movie/day")
         .then((data) => {
           setBannerList(data);
+          setIsLoading(false);
         })
         .catch((error) => {
           console.log(error);
         });
     };
+    // setTimeout(() => {
+    //   setIsLoading(false);
+    // }, 1000);
     fetchApi();
   }, []);
 
   return (
-    <Swiper
-      autoplay={{
-        delay: 2500,
-        disableOnInteraction: false,
-      }}
-      navigation={true}
-      modules={[Navigation, Autoplay]}
-      className="absolute top-0 left-0 w-full h-full  rounded-2xl overflow-x-hidden   mySwiper"
-    >
-      {bannerList.map((item, index) => {
-        return (
-          <SwiperSlide key={index}>
-            <BannerItem data={item} />
-          </SwiperSlide>
-        );
-      })}
-    </Swiper>
+    <>
+      {isloading ? (
+        <SkeletonItem className={" w-full h-[400px]"} />
+      ) : (
+        <Swiper
+          autoplay={{
+            delay: 5000,
+            disableOnInteraction: false,
+          }}
+          navigation={true}
+          modules={[Navigation, Autoplay]}
+          className="absolute top-0 left-0 w-full h-full  rounded-2xl overflow-x-hidden   mySwiper"
+        >
+          {bannerList.map((item, index) => {
+            return (
+              <SwiperSlide key={index}>
+                <BannerItem data={item} />
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
+      )}
+    </>
   );
 }
 

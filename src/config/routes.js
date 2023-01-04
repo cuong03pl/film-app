@@ -7,7 +7,7 @@ const routes = {
   genres: "/genres/:id/:name",
   person: "/person/:id",
   history: "/history",
-  favourite: "/favourite",
+  myfavourite: "/myfavourite",
   profile: "/profile",
   error: "*",
 };

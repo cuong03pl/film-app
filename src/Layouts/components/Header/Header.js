@@ -35,7 +35,7 @@ function Header() {
           />
 
           <HeaderItem
-            to={config.routes.favourite}
+            to={config.routes.myfavourite}
             Icon={<FavouriteIcon className={"w-[25px] h-[25px] mr-3"} />}
             title={"Yêu Thích"}
           />

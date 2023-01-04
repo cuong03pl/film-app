@@ -1,6 +1,6 @@
 import config from "~/config";
 import ErrorPage from "~/pages/ErrorPage/ErrorPage";
-import FavouritePage from "~/pages/FavouritePage/FavouritePage";
+import MyFavouritePage from "~/pages/MyFavouritePage/MyFavouritePage";
 import GenresPage from "~/pages/GenresPage/GenresPage";
 import HomePage from "~/pages/HomePage/HomePage";
 import LoginPage from "~/pages/LoginPage/LoginPage";
@@ -43,8 +43,8 @@ const publicRoutes = [
   },
 
   {
-    path: config.routes.favourite,
-    component: <FavouritePage />,
+    path: config.routes.myfavourite,
+    component: <MyFavouritePage />,
   },
   {
     path: config.routes.profile,

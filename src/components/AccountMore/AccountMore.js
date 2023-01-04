@@ -21,7 +21,7 @@ function AccountMore({ data }) {
             {data?.displayName}
           </span>
           <Images
-            fallBack={`${image.similarFilmFallBack}`}
+            fallBack={`${image?.actingFallBack}`}
             src={data?.photoURL}
             alt=""
             className="w-[30px] cursor-pointer h-[30px] rounded-[50%]"
