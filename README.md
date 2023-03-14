@@ -5,3 +5,5 @@ dùng useCallback tối ưu
 
 clean up useffect
 set max width cho anh movie details
+
+fix giao diện movie page
