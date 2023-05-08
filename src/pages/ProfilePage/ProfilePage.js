@@ -6,7 +6,7 @@ import { UserContext } from "~/context/AuthProvider";
 
 function ProfilePage() {
   const user = useContext(UserContext);
-  console.log(user);
+
   return (
     <div className="flex items-center w-full">
       <div className="w-[50%] flex justify-center">

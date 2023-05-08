@@ -1,7 +1,7 @@
 <!-- convert lai vote -->
 
-đổi tên movie các thư mục thành film
-dùng useCallback tối ưu
-
 clean up useffect
-set max width cho anh movie details
+
+làm lại phần loading và skeleton -- ok
+
+fix bug

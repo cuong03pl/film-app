@@ -9,7 +9,7 @@ import SkeletonItem from "../Skeleton/Skeleton";
 import image from "~/assets/img/img";
 const Images = React.lazy(() => import("../Images/Images"));
 
-function SearchResult({ data }) {
+function SearchResult({ data, skeleton = true }) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -26,7 +26,7 @@ function SearchResult({ data }) {
         {data?.map((item, index) => {
           return (
             <>
-              {isLoading ? (
+              {isLoading && skeleton ? (
                 <div className="mr-[30px] mt-6">
                   <SkeletonItem className={" w-[180px] h-[270px]"} />
                   <SkeletonItem className={" w-[180px] h-[28px] mt-[6px]"} />

@@ -29,9 +29,6 @@ function MovieList({ path, title }) {
         });
     };
     fetchApi();
-    // setTimeout(() => {
-    //   setIsLoading(false);
-    // }, 1000);
   }, [path]);
   return (
     <div>

@@ -1,6 +1,7 @@
 import RightBar from "../components/RightBar/RightBar";
 import Header from "../components/Header/Header";
 import AuthProvider from "~/context/AuthProvider";
+import { useEffect } from "react";
 
 function DefaultLayout({ children }) {
   return (

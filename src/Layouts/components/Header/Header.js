@@ -21,6 +21,7 @@ function Header() {
       setLogin(false);
     }
   }, [data]);
+
   return (
     <div className=" bg-bgPrimary sticky top-0 h-screen px-5 py-4  flex justify-between flex-col  border-r-[1px] border-solid border-[#16182333]">
       <div>

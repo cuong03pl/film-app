@@ -4,12 +4,12 @@ import { Link, useParams } from "react-router-dom";
 import image from "~/assets/img/img";
 import { CloseIcon } from "~/components/Icon/Icon";
 import Images from "~/components/Images/Images";
-import SkeletonItem from "~/components/Skeleton/Skeleton";
 import config from "~/config";
 
 import { UserContext } from "~/context/AuthProvider";
 import { db } from "~/firebase/config";
 import "./MyFavouritePage.module.scss";
+import Spinner from "~/components/Spinner/Spinner";
 function MyFavouritePage() {
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
@@ -30,9 +30,6 @@ function MyFavouritePage() {
         });
     };
     fetchApi();
-    // setTimeout(() => {
-    //   setIsLoading(false);
-    // }, 1000);
   }, [id, user]);
   useEffect(() => {
     if (deleted && user) {
@@ -53,16 +50,12 @@ function MyFavouritePage() {
   };
   return (
     <div className="mt-[12px] w-full ">
-      <div className="flex relative w-full flex-wrap">
-        {favourite?.map((item, index) => {
-          return (
-            <div className="max-w-[25%] w-[25%] flex flex-col items-center mt-6 ">
-              {isLoading ? (
-                <>
-                  <SkeletonItem className={" w-[180px] h-[270px]"} />
-                  <SkeletonItem className={" w-[180px] h-[20px] mt-[6px]"} />
-                </>
-              ) : (
+      {isLoading && <Spinner />}
+      {!isLoading && (
+        <div className="flex relative w-full flex-wrap">
+          {favourite?.map((item, index) => {
+            return (
+              <div className="max-w-[25%] w-[25%] flex flex-col items-center mt-6 ">
                 <Link
                   className="flex flex-col items-center overflow-hidden relative hover:scale-105 hover:brightness-110 transition duration-300"
                   key={index}
@@ -78,18 +71,23 @@ function MyFavouritePage() {
                     {item?.title}
                   </p>
                 </Link>
-              )}
 
-              <div
-                onClick={() => handleDelete(item)}
-                className="cursor-pointer  items-center px-2 py-1 top-2 mt-2 rounded-2xl bg-[#5985FF] text-[white] delete-btn"
-              >
-                <CloseIcon className={"h-4 w-4 "} />
+                <div
+                  onClick={() => handleDelete(item)}
+                  className="cursor-pointer delete-btn w-[150px] mt-3"
+                >
+                  <span
+                    className="border-[1px] mr-[10px] flex items-center justify-center border-solid
+                   border-white text-[#b5b5b5] rounded-3xl  py-2 cursor-pointer hover:bg-[#007ACC] hover:text-white"
+                  >
+                    XÓA
+                  </span>
+                </div>
               </div>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }
