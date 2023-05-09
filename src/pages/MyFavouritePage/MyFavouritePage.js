@@ -76,12 +76,12 @@ function MyFavouritePage() {
                   onClick={() => handleDelete(item)}
                   className="cursor-pointer delete-btn w-[150px] mt-3"
                 >
-                  <span
+                  <div
                     className="border-[1px] mr-[10px] flex items-center justify-center border-solid
                    border-white text-[#b5b5b5] rounded-3xl  py-2 cursor-pointer hover:bg-[#007ACC] hover:text-white"
                   >
                     XÓA
-                  </span>
+                  </div>
                 </div>
               </div>
             );
